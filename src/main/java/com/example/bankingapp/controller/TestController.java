@@ -1,10 +1,9 @@
 package com.example.bankingapp.controller;
 
+import com.example.bankingapp.dto.PatientDetailsRequest;
 import com.example.bankingapp.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TestController {
@@ -45,5 +44,10 @@ public class TestController {
     @GetMapping("fetch-details/{productType}")
     public String flipCartProductDetails(@PathVariable String productType){
         return testService.fetchProductDetails(productType);
+    }
+
+    @PostMapping("register-patient")
+    public String registerNewPatient(@RequestBody PatientDetailsRequest patientDetailsRequest){
+        return testService.registerPatient(patientDetailsRequest);
     }
 }
