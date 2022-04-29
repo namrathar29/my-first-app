@@ -28,12 +28,17 @@ public class MetroCardServiceImpl implements MetroCardService {
 
     @Override
     public MetroCardUserDetailsRequest getUserDetails(int userId){
-        Optional<User> users = userDAO.findById(userId);
-        MetroCardUserDetailsRequest userDetails = new MetroCardUserDetailsRequest();
-        userDetails.setName(users.get().getName());
-        userDetails.setEmailId(users.get().getEmailId());
-        userDetails.setCardType(users.get().getCardType());
-        return userDetails;
+
+        MetroCardUserDetailsRequest userDetailsRequest = new MetroCardUserDetailsRequest();
+
+        Optional<User> user = userDAO.findById(userId);
+        User userDetails = user.get();
+        
+        userDetailsRequest.setUserId(userDetails.getUserId());
+        userDetailsRequest.setName(userDetails.getName());
+        userDetailsRequest.setEmailId(userDetails.getEmailId());
+        userDetailsRequest.setCardType(userDetails.getCardType());
+        return userDetailsRequest;
 
     }
 }
