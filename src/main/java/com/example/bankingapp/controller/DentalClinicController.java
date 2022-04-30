@@ -33,4 +33,14 @@ public class DentalClinicController {
     public PatientProfile fetchPatientProfileWithHistory(@PathVariable int patientId) {
         return dentalClinicService.profileDetailsWithHistory(patientId);
     }
+
+    @GetMapping("fetch-patient-details/{name}")
+    public PatientProfile fetchPatientDetailsByNameOnly(@PathVariable String name){
+        return dentalClinicService.fetchPatientDetailsByName(name);
+    }
+
+    @GetMapping("fetch-patient-details/{patientId}/{name}")
+    public PatientProfile fetchPatientDetailsByNameAndId(@PathVariable int patientId, @PathVariable String name){
+        return dentalClinicService.fetchPatientProfileByNameAndId(patientId, name);
+    }
 }

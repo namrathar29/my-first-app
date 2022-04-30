@@ -18,5 +18,5 @@ public class PatientProfile {
     private String emailId;
     private String mobileNumber;
 
-    private List<HistoryOfPatientId1> historyOfPatientId1s;
+//    private List<HistoryOfPatientId1> historyOfPatientId1s;
 }

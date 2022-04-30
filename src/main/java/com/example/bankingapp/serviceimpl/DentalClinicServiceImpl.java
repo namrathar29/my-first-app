@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Service
 public class DentalClinicServiceImpl implements DentalClinicService {
 
@@ -85,9 +87,38 @@ public class DentalClinicServiceImpl implements DentalClinicService {
         List<HistoryOfPatientId1> historyOfPatientId1s = new ArrayList<>();
         HistoryOfPatientId1 historyOfPatientId1 = new HistoryOfPatientId1();
 //        historyOfPatientId1.setDate(PatientHistoryOfPatientId1);
+//        for(HistoryOfPatientId1 historyOfPatientId1: historyOfPatientId1s){
+//            historyOfPatientId1
+//        }
 
 
 
+        return patientProfile;
+    }
+
+    @Override
+    public PatientProfile fetchPatientDetailsByName(String name) {
+
+        Profile profile = profileDAO.findByName(name);
+
+        PatientProfile patientProfile = new PatientProfile();
+        patientProfile.setPatientId(profile.getPatientId());
+        patientProfile.setName(profile.getName());
+        patientProfile.setEmailId(profile.getEmailId());
+        patientProfile.setMobileNumber(profile.getMobileNumber());
+        return patientProfile;
+    }
+
+    @Override
+    public PatientProfile fetchPatientProfileByNameAndId(int patientId, String name) {
+
+        Profile profile = profileDAO.findByNameAndId(patientId, name);
+
+        PatientProfile patientProfile = new PatientProfile();
+        patientProfile.setPatientId(profile.getPatientId());
+        patientProfile.setName(profile.getName());
+        patientProfile.setEmailId(profile.getEmailId());
+        patientProfile.setMobileNumber(profile.getMobileNumber());
         return patientProfile;
     }
 }
