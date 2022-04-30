@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Profile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "patient_id")
     private int patientId;
 
