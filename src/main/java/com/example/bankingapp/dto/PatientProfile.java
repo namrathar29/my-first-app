@@ -11,11 +11,12 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class MetroCardUserDetailsRequest {
-    private int userId;
+public class PatientProfile {
+
+    private int patientId;
     private String name;
     private String emailId;
-    private String cardType;
+    private String mobileNumber;
 
-    private List<ReviewUserResponse> reviews;
+    private List<HistoryOfPatientId1> historyOfPatientId1s;
 }
