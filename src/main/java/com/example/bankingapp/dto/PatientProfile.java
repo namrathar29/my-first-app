@@ -1,5 +1,6 @@
 package com.example.bankingapp.dto;
 
+import com.example.bankingapp.entity.PatientHistoryOfPatientId1;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,5 +19,5 @@ public class PatientProfile {
     private String emailId;
     private String mobileNumber;
 
-//    private List<HistoryOfPatientId1> historyOfPatientId1s;
+    private List<HistoryOfPatientId1> historyOfPatientId1s;
 }

@@ -13,11 +13,9 @@ import com.example.bankingapp.service.DentalClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
 public class DentalClinicServiceImpl implements DentalClinicService {
@@ -84,13 +82,17 @@ public class DentalClinicServiceImpl implements DentalClinicService {
         patientProfile.setMobileNumber(profileDetailsOfPatient.getMobileNumber());
 
 
-        List<HistoryOfPatientId1> historyOfPatientId1s = new ArrayList<>();
-        HistoryOfPatientId1 historyOfPatientId1 = new HistoryOfPatientId1();
-//        historyOfPatientId1.setDate(PatientHistoryOfPatientId1);
-//        for(HistoryOfPatientId1 historyOfPatientId1: historyOfPatientId1s){
-//            historyOfPatientId1
-//        }
+        List<PatientHistoryOfPatientId1> patientHistoryOfPatientId1s = patientHistoryOfPatientId1DAO.findAll();
 
+        for(PatientHistoryOfPatientId1 patientHistoryOfPatientId1: patientHistoryOfPatientId1s){
+            HistoryOfPatientId1 historyOfPatientId1 = new HistoryOfPatientId1();
+            historyOfPatientId1.setDate(patientHistoryOfPatientId1.getDate());
+            historyOfPatientId1.setTime(patientHistoryOfPatientId1.getTime());
+            historyOfPatientId1.setDoctor(patientHistoryOfPatientId1.getDoctor());
+            historyOfPatientId1.setPrescription(patientHistoryOfPatientId1.getPrescription());
+            historyOfPatientId1.setAmountPaid(patientHistoryOfPatientId1.getAmountPaid());
+        }
+        
 
 
         return patientProfile;
