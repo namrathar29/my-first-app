@@ -14,5 +14,11 @@ public interface DentalClinicService {
 
     String fillPatientHistory(HistoryOfPatientId1 historyOfPatientId1);
 
+    HistoryOfPatientId1 patientHistoryOfId1(int serialNumber);
+
     PatientProfile profileDetailsWithHistory(int patientId);
+
+    PatientProfile fetchPatientDetailsByName(String name);
+
+    PatientProfile fetchPatientProfileByNameAndId(int patientId, String name);
 }

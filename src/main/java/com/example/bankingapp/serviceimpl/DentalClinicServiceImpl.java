@@ -13,9 +13,9 @@ import com.example.bankingapp.service.DentalClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class DentalClinicServiceImpl implements DentalClinicService {
@@ -36,6 +36,10 @@ public class DentalClinicServiceImpl implements DentalClinicService {
         return "Patient registered successfully";
     }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     @Autowired
     private ProfileDAO profileDAO;
 
@@ -54,6 +58,10 @@ public class DentalClinicServiceImpl implements DentalClinicService {
         return patientProfile;
     }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     @Autowired
     private PatientHistoryOfPatientId1DAO patientHistoryOfPatientId1DAO;
 
@@ -70,6 +78,32 @@ public class DentalClinicServiceImpl implements DentalClinicService {
         return "details saved successfully";
     }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    @Override
+    public HistoryOfPatientId1 patientHistoryOfId1(int serialNumber) {
+
+        List<PatientHistoryOfPatientId1> patientHistoryOfPatientId1s = patientHistoryOfPatientId1DAO.findAll();
+        HistoryOfPatientId1 historyOfPatientId1 = new HistoryOfPatientId1();
+
+        for(PatientHistoryOfPatientId1 patientHistoryOfPatientId1: patientHistoryOfPatientId1s){
+
+            historyOfPatientId1.setDate(patientHistoryOfPatientId1.getDate());
+            historyOfPatientId1.setTime(patientHistoryOfPatientId1.getTime());
+            historyOfPatientId1.setDoctor(patientHistoryOfPatientId1.getDoctor());
+            historyOfPatientId1.setPrescription(patientHistoryOfPatientId1.getPrescription());
+            historyOfPatientId1.setAmountPaid(patientHistoryOfPatientId1.getAmountPaid());
+        }
+
+        return historyOfPatientId1;
+    }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     @Override
     public PatientProfile profileDetailsWithHistory(int patientId) {
         Optional<Profile> profile = profileDAO.findById(patientId);
@@ -82,12 +116,54 @@ public class DentalClinicServiceImpl implements DentalClinicService {
         patientProfile.setMobileNumber(profileDetailsOfPatient.getMobileNumber());
 
 
-        List<HistoryOfPatientId1> historyOfPatientId1s = new ArrayList<>();
-        HistoryOfPatientId1 historyOfPatientId1 = new HistoryOfPatientId1();
-//        historyOfPatientId1.setDate(PatientHistoryOfPatientId1);
+        List<PatientHistoryOfPatientId1> patientHistoryOfPatientId1s = patientHistoryOfPatientId1DAO.findAll();
 
-
+        for(PatientHistoryOfPatientId1 patientHistoryOfPatientId1: patientHistoryOfPatientId1s){
+            HistoryOfPatientId1 historyOfPatientId1 = new HistoryOfPatientId1();
+            historyOfPatientId1.setDate(patientHistoryOfPatientId1.getDate());
+            historyOfPatientId1.setTime(patientHistoryOfPatientId1.getTime());
+            historyOfPatientId1.setDoctor(patientHistoryOfPatientId1.getDoctor());
+            historyOfPatientId1.setPrescription(patientHistoryOfPatientId1.getPrescription());
+            historyOfPatientId1.setAmountPaid(patientHistoryOfPatientId1.getAmountPaid());
+        }
 
         return patientProfile;
     }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    @Override
+    public PatientProfile fetchPatientDetailsByName(String name) {
+
+        Profile profile = profileDAO.findByName(name);
+
+        PatientProfile patientProfile = new PatientProfile();
+        patientProfile.setPatientId(profile.getPatientId());
+        patientProfile.setName(profile.getName());
+        patientProfile.setEmailId(profile.getEmailId());
+        patientProfile.setMobileNumber(profile.getMobileNumber());
+        return patientProfile;
+    }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    @Override
+    public PatientProfile fetchPatientProfileByNameAndId(int patientId, String name) {
+
+        Profile profile = profileDAO.findByNameAndId(patientId, name);
+
+        PatientProfile patientProfile = new PatientProfile();
+        patientProfile.setPatientId(profile.getPatientId());
+        patientProfile.setName(profile.getName());
+        patientProfile.setEmailId(profile.getEmailId());
+        patientProfile.setMobileNumber(profile.getMobileNumber());
+        return patientProfile;
+    }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 }

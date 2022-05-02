@@ -1,5 +1,6 @@
 package com.example.bankingapp.dto;
 
+import com.example.bankingapp.entity.PatientHistoryOfPatientId1;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

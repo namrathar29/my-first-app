@@ -29,8 +29,23 @@ public class DentalClinicController {
         return dentalClinicService.fillPatientHistory(historyOfPatientId1);
     }
 
+    @GetMapping("get-patient-history/{serialNumber}")
+    public HistoryOfPatientId1 fetchPatientHistory(@PathVariable int serialNumber) {
+        return dentalClinicService.patientHistoryOfId1(serialNumber);
+    }
+
     @GetMapping("get-patient-profile-and-history/{patientId}")
     public PatientProfile fetchPatientProfileWithHistory(@PathVariable int patientId) {
         return dentalClinicService.profileDetailsWithHistory(patientId);
+    }
+
+    @GetMapping("fetch-patient-details/{name}")
+    public PatientProfile fetchPatientDetailsByNameOnly(@PathVariable String name){
+        return dentalClinicService.fetchPatientDetailsByName(name);
+    }
+
+    @GetMapping("fetch-patient-details/{patientId}/{name}")
+    public PatientProfile fetchPatientDetailsByNameAndId(@PathVariable int patientId, @PathVariable String name){
+        return dentalClinicService.fetchPatientProfileByNameAndId(patientId, name);
     }
 }
