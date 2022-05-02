@@ -36,6 +36,10 @@ public class DentalClinicServiceImpl implements DentalClinicService {
         return "Patient registered successfully";
     }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     @Autowired
     private ProfileDAO profileDAO;
 
@@ -54,6 +58,10 @@ public class DentalClinicServiceImpl implements DentalClinicService {
         return patientProfile;
     }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     @Autowired
     private PatientHistoryOfPatientId1DAO patientHistoryOfPatientId1DAO;
 
@@ -69,6 +77,32 @@ public class DentalClinicServiceImpl implements DentalClinicService {
         patientHistoryOfPatientId1DAO.save(patientHistoryOfPatientId1);
         return "details saved successfully";
     }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    @Override
+    public HistoryOfPatientId1 patientHistoryOfId1(int serialNumber) {
+
+        List<PatientHistoryOfPatientId1> patientHistoryOfPatientId1s = patientHistoryOfPatientId1DAO.findAll();
+        HistoryOfPatientId1 historyOfPatientId1 = new HistoryOfPatientId1();
+
+        for(PatientHistoryOfPatientId1 patientHistoryOfPatientId1: patientHistoryOfPatientId1s){
+
+            historyOfPatientId1.setDate(patientHistoryOfPatientId1.getDate());
+            historyOfPatientId1.setTime(patientHistoryOfPatientId1.getTime());
+            historyOfPatientId1.setDoctor(patientHistoryOfPatientId1.getDoctor());
+            historyOfPatientId1.setPrescription(patientHistoryOfPatientId1.getPrescription());
+            historyOfPatientId1.setAmountPaid(patientHistoryOfPatientId1.getAmountPaid());
+        }
+
+        return historyOfPatientId1;
+    }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     @Override
     public PatientProfile profileDetailsWithHistory(int patientId) {
@@ -92,11 +126,13 @@ public class DentalClinicServiceImpl implements DentalClinicService {
             historyOfPatientId1.setPrescription(patientHistoryOfPatientId1.getPrescription());
             historyOfPatientId1.setAmountPaid(patientHistoryOfPatientId1.getAmountPaid());
         }
-        
-
 
         return patientProfile;
     }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     @Override
     public PatientProfile fetchPatientDetailsByName(String name) {
@@ -111,6 +147,10 @@ public class DentalClinicServiceImpl implements DentalClinicService {
         return patientProfile;
     }
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     @Override
     public PatientProfile fetchPatientProfileByNameAndId(int patientId, String name) {
 
@@ -123,4 +163,7 @@ public class DentalClinicServiceImpl implements DentalClinicService {
         patientProfile.setMobileNumber(profile.getMobileNumber());
         return patientProfile;
     }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 }
